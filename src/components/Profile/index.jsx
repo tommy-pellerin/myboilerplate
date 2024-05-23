@@ -20,10 +20,12 @@ function Profile() {
   
 
   useEffect(() => {
-    console.log(new Date());
-    console.log("je fetche profile");
-    executeFetch(); //execute the hook when need
-    console.log("j'ai fini de fetché profil")
+    if (currentUser) { // Only fetch when currentUser is not null
+      console.log(new Date());
+      console.log("je fetche profile");
+      executeFetch(); //execute the hook when need
+      console.log("j'ai fini de fetché profil")
+    }
   }
   ,[userID, currentUser]) //utiliser la valeur de Jotai atom pour re render apres mise à jour;
 

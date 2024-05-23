@@ -17,15 +17,21 @@ import { useAtomValue } from 'jotai'
 import { userAtom } from './components/atoms/user'
 
 const PrivateRoute = ({ children }) => {
-  const user = useAtomValue(userAtom);
+
+  const currentUser = useAtomValue(userAtom);
+  console.log(currentUser.id);
   const location = useLocation();
-  return user.id ? children : <Navigate to="/login" state={{ from: location }} />;
-};
+  if(currentUser.id || currentUser.id === null){ //Je suis obligé de mettre currentUser.id===null car l'appel du hook useFetch dans un uneEffect me donne un null puis un vrai résultat
+    return children 
+  } else {
+  return <Navigate to="/login" state={{ from: location }} />;
+  }
+}
 
 const LoggedRoute = ({ children }) => {
-  const user = useAtomValue(userAtom);
+  const currentUser = useAtomValue(userAtom);
   const location = useLocation();
-  if (!user.id) {
+  if (!currentUser.id) {
     alert('You must be logged in to log out');
     return <Navigate to="/" state={{ from: location }} />;
   }
