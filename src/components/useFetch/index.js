@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 import { useAtomValue} from 'jotai';
 import { userAtom } from '../atoms/user';
 
-function useFetch(url, httpMethod, initialData = null, executeImmediately = true) {
+function useFetch(url, httpMethod, initialData = "", executeImmediately = true) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -52,7 +52,6 @@ function useFetch(url, httpMethod, initialData = null, executeImmediately = true
 
   const executeFetch = (newData) => {
     console.log("jexecute");
-    console.log(readyToFetch);
     setDataToFetch(newData);
     setReadyToFetch(true);
   };

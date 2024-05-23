@@ -30,7 +30,8 @@ function Login() {
       // Dispatch Jotai store
       setUser({
         id:data.user.id,
-        username:data.user.username
+        username:data.user.username,
+        isLoading:false
       })
       // Redirect to prévious page or to home page
       let { from } = location.state || { from: { pathname: "/" } };

@@ -10,21 +10,28 @@ import Login from "./components/Login"
 import Logout from "./components/Logout"
 import Footer from "./components/Footer"
 import Workouts from "./components/Workouts"
+import { useAtomValue } from 'jotai'
+import { userAtom } from './components/atoms/user'
+import Loading from "./components/Loading"
 
 //Extern import
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom'
-import { useAtomValue } from 'jotai'
-import { userAtom } from './components/atoms/user'
+
 
 const PrivateRoute = ({ children }) => {
 
-  const currentUser = useAtomValue(userAtom);
-  console.log(currentUser.id);
+  const { id, isLoading } = useAtomValue(userAtom);
+  console.log("isLoading", isLoading);
   const location = useLocation();
-  if(currentUser.id || currentUser.id === null){ //Je suis obligé de mettre currentUser.id===null car l'appel du hook useFetch dans un uneEffect me donne un null puis un vrai résultat
-    return children 
+
+  if (isLoading) {
+    return <Loading />; // Render Loading component when isLoading is true
+  }
+
+  if (id) {
+    return children;
   } else {
-  return <Navigate to="/login" state={{ from: location }} />;
+    return <Navigate to="/login" state={{ from: location }} />;
   }
 }
 

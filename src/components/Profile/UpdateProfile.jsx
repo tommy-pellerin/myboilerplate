@@ -20,7 +20,8 @@ const UpdateProfile = ({user,setIsUpdating}) => { //gets props from parent compo
     if(data){
       setCurrentUser({
         id:data.id,
-        username:data.username
+        username:data.username,
+        isLoading:false
       })
       setIsUpdating(false)
     }

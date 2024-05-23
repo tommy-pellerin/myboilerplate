@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import UpdateProfile from './UpdateProfile';
 import DisplayProfile from './DisplayProfile';
-
+import Loading from '../Loading';
 // utiliser la vateur de Jotai atom pour re render apres mise à jour;
 import { useAtomValue} from 'jotai';
 import { userAtom } from '../atoms/user';
@@ -21,23 +21,23 @@ function Profile() {
 
   useEffect(() => {
     if (currentUser) { // Only fetch when currentUser is not null
-      console.log(new Date());
       console.log("je fetche profile");
       executeFetch(); //execute the hook when need
-      console.log("j'ai fini de fetché profil")
+      console.log("j'ai fini executeFetch")
     }
   }
   ,[userID, currentUser]) //utiliser la valeur de Jotai atom pour re render apres mise à jour;
 
   useEffect(() => {
-    console.log(data);
-    if (data) {
+    if (data && !isLoading) { // Check that data is not null and isLoading is false
+      console.log(data);
       setUser(data);
     }
-  }, [data]);
+  }, [data, isLoading]);
 
   return ( 
     <div>
+      {isLoading && <Loading />} {/* Render Loading component when isLoading is true */}
       <h1>Profile</h1>      
       {isUpdating ? <UpdateProfile user={user} setIsUpdating={setIsUpdating} />:
         <>
