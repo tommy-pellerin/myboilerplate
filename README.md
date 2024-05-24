@@ -9,3 +9,11 @@ Currently, two official plugins are available:
 
 # To use myboilerplate
 
+Whant can you find in this boilerplate :
+- react architecture
+- private route
+- footer
+- signup, login logout wih jotai
+- useFetch hook
+- navbar
+- some tailwind style

@@ -1,4 +1,7 @@
 import { lazy,Suspense } from "react"; //Suspense est utilisé pour attendre que le composant DisplayPosts soit chargé. Pendant que DisplayPosts est en train de charger (c'est-à-dire, pendant que l'importation asynchrone est en cours), Suspense affiche un composant de repli, qui est <div>Loading...</div>
+import CityForm from "../City";
+
+
 const DisplayPosts = lazy(() => import('./DisplayPosts'));
 
 function Home() {
@@ -12,6 +15,8 @@ function Home() {
       <Suspense fallback={<div>Loading...</div>}>
         <DisplayPosts />
       </Suspense>
+
+      <CityForm/>
     </div>
   );
 }

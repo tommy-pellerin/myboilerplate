@@ -27,31 +27,6 @@ const UpdateProfile = ({user,setIsUpdating}) => { //gets props from parent compo
     }
   },[data])
 
-  // const fetchData = (data) => {
-  //   fetch('http://localhost:1337/api/users-permissions/users/me', {
-  //     method: 'put',
-  //     headers: {
-  //       'Authorization': `Bearer ${token}`,
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(data) //on passe les données du formulaire à l'API sous format json
-  //   })
-  //   .then((response) => { 
-  //     return response.json(); 
-  //   })
-  //   .then((response) => {
-  //     console.log(response);
-  //     //push data to Jotai
-  //     setCurrentUser({
-  //       id:response.id,
-  //       username:response.username
-  //     })
-  //     setIsUpdating(false)
-
-  //   })
-  //   .catch((error) => { console.error(error); });
-  // }
-
   function saveUpdate(event){
     if(userNameInput !== ""){
       event.preventDefault()
