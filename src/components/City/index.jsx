@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import cities from './cities.json';
+import useLatLon from "../useLatLon";
 
 const CityForm = () => {
   const citiesList = cities.cities;
   const [input, setInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [selectedCity,setSelectedCity] = useState("")
+  const { latitude,longitude, setLatLon } = useLatLon("")
 
   const handleInput = (e) => {
     let userInput = e.target.value;
@@ -22,6 +24,7 @@ const CityForm = () => {
   };
 
   const handleSelect = (city) => {
+    console.log(city);
     setSelectedCity(city);
     setInput(city.city_code);
     setSuggestions([]);
@@ -31,7 +34,14 @@ const CityForm = () => {
     e.preventDefault();
     // Do something with selectedCity
     console.log(selectedCity);
+    setLatLon(selectedCity.city_code);
+    // Reset the input form
+    setInput("");
   };
+
+  useEffect(() => {
+    console.log(latitude,longitude);
+  }, [latitude,longitude]);
 
   return(
     
@@ -47,7 +57,7 @@ const CityForm = () => {
         <ul className="mt-2 bg-white shadow rounded">
           {suggestions.map((suggestion, index) => (
             <li 
-              key={index} 
+              key={index}
               className="border-b last:border-b-0 p-2 hover:bg-gray-100 cursor-pointer"
               onClick={() => handleSelect(suggestion)}
             >
